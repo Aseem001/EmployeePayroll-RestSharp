@@ -21,7 +21,7 @@ namespace EmployeePayroll_RestSharp
         [TestInitialize]
         public void SetUp()
         {
-            //Initialize the base URL for requests made by the instance
+            //Initialize the base URL to execute requests made by the instance
             client = new RestClient("http://localhost:4000");
         }
         private IRestResponse GetEmployeeList()
@@ -34,6 +34,10 @@ namespace EmployeePayroll_RestSharp
             IRestResponse response = client.Execute(request);
             return response;
         }
+
+        /// <summary>
+        /// UC 1 : Retrieve all employee details in the json file
+        /// </summary>
         [TestMethod]
         public void OnCallingGetAPI_ReturnEmployeeList()
         {            
@@ -47,6 +51,32 @@ namespace EmployeePayroll_RestSharp
             {
                 Console.WriteLine("Id: "+emp.Id + "\t" + "Name: "+emp.Name + "\t" + "Salary: "+emp.Salary);
             }
+        }
+
+        /// <summary>
+        /// UC 2 : Add new employee to the json file in JSON server and return the same
+        /// </summary>
+        [TestMethod]
+        public void OnCallingPostAPI_ReturnEmployeeObject()
+        {
+            //Arrange
+            //Initialize the request for POST to add new employee
+            RestRequest request = new RestRequest("/Employees/list", Method.POST);
+            JsonObject jsonObj = new JsonObject();
+            jsonObj.Add("name", "Sir Don Bradman");
+            jsonObj.Add("salary", "100000");
+            //Added parameters to the request object such as the content-type and attaching the jsonObj with the request
+            request.AddParameter("application/json", jsonObj, ParameterType.RequestBody);
+
+            //Act
+            IRestResponse response = client.Execute(request);
+
+            //Assert
+            Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
+            Employee employee = JsonConvert.DeserializeObject<Employee>(response.Content);
+            Assert.AreEqual("Sir Don Bradman", employee.Name);
+            Assert.AreEqual("100000", employee.Salary);
+            Console.WriteLine(response.Content);
         }
     }
 }
