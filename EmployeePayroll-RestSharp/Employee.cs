@@ -1,5 +1,9 @@
-﻿
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Employee.cs" company="Bridgelabz">
+//   Copyright © 2018 Company
+// </copyright>
+// <creator Name="Aseem Anand"/>
+// --------------------------------------------------------------------------------------------------------------------
 namespace EmployeePayroll_RestSharp
 {
     using System;

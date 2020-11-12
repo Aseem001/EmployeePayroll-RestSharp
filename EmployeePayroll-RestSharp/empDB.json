@@ -1,0 +1,24 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "Rohit Sharma",
+      "salary": "75000"
+    },
+    {
+      "id": 2,
+      "name": "MS Dhoni",
+      "salary": "70000"
+    },
+    {
+      "id": 3,
+      "name": "Ajinkya Rahane",
+      "salary": "45000"
+    },
+    {
+      "id": 4,
+      "name": "Virat Kohli",
+      "salary": "50000"
+    }
+  ]
+}
